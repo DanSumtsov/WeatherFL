@@ -7,7 +7,7 @@ workflows:
       flutter:
         version: "$FLUTTER_VERSION"
       xcode:
-        version: "14.0"
+        version: "14.0" # Укажите конкретную версию Xcode
     triggering:
       events:
         - push
