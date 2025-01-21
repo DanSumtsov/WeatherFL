@@ -1,17 +1,12 @@
 workflows:
-  ios_unsigned_build:
-    name: iOS Unsigned Build
+  ios_simulator_build:
+    name: iOS Simulator Build
     environment:
       vars:
         FLUTTER_VERSION: stable
-        XCODE_WORKSPACE: "swiftly.xcworkspace" # <-- Put the name of your workspace here.
-        XCODE_SCHEME: "swiftly" # <-- Put the name of your scheme here.
-        BUNDLE_ID: "io.codemagic.swiftly" # <-- Put your Bundle Id here.
-        APP_STORE_APPLE_ID: 1555555551
       flutter:
         version: "$FLUTTER_VERSION"
-      xcode: latest # <-- set to specific version e.g. 14.3, 15.0 to avoid unexpected updates.
-      cocoapods: default # Укажите конкретную версию Xcode
+      xcode: latest
     triggering:
       events:
         - push
@@ -19,11 +14,11 @@ workflows:
       - name: Install Flutter dependencies
         script: |
           flutter pub get
-      - name: Build iOS unsigned build
+      - name: Build iOS simulator build
         script: |
-          flutter build ios --no-codesign
+          flutter build ios --simulator --no-codesign
+      - name: Create app.zip
+        script: |
+          cd build/ios/iphonesimulator && zip -r app.zip *.app
     artifacts:
-      - build/ios/Debug-iphoneos/*.app
-      - build/ios/Debug-iphoneos/*.ipa
-      - build/ios/Debug-iphoneos/*.xcarchive
-      - build/ios/Debug-iphoneos/**/*.zip
+      - build/ios/iphonesimulator/app.zip
