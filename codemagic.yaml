@@ -24,3 +24,6 @@ workflows:
           flutter build ios --no-codesign
     artifacts:
       - build/ios/Debug-iphoneos/*.app
+      - build/ios/Debug-iphoneos/*.ipa
+      - build/ios/Debug-iphoneos/*.xcarchive
+      - build/ios/Debug-iphoneos/**/*.zip
