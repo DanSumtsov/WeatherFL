@@ -10,7 +10,7 @@ scripts:
         find . -name "Podfile" -execdir pod install \;
     - name: Flutter build simulator app
       script: | 
-        flutter build ios --debug --no-codesign
+        flutter build ios --debug --no-codesign \
   artifacts:
     - build/ios/ipa/*.ipa
     - /tmp/xcodebuild_logs/*.log
