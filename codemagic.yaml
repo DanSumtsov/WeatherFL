@@ -11,7 +11,7 @@ scripts:
     - name: Flutter build simulator app
       script: | 
         flutter build ios --debug --no-codesign \
-  artifacts:
+artifacts:
     - build/ios/ipa/*.ipa
     - /tmp/xcodebuild_logs/*.log
     - flutter_drive.log
