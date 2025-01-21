@@ -1,3 +1,7 @@
+workflows:
+    sample-workflow:
+        environment:
+            flutter: stable
 scripts:
     - name: Set up code signing settings on Xcode project
       script: | 
