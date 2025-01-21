@@ -1,23 +1,25 @@
 workflows:
-    sample-workflow:
-        environment:
-            flutter: stable
-    ios-workflow-id:
-        name: iOS Sample Workflow
-scripts:
-    - name: Set up code signing settings on Xcode project
-      script: | 
-        xcode-project use-profiles
-    - name: Get Flutter packages
-      script: | 
-        flutter pub get
-    - name: Install pods
-      script: | 
-        find . -name "Podfile" -execdir pod install \;
-    - name: Flutter build simulator app
-      script: | 
-        flutter build ios --debug --no-codesign \
-artifacts:
-    - build/ios/ipa/*.ipa
-    - /tmp/xcodebuild_logs/*.log
-    - flutter_drive.log
+  ios_unsigned_build:
+    name: iOS Unsigned Build
+    environment:
+      vars:
+        FLUTTER_VERSION: stable
+      flutter:
+        version: "$FLUTTER_VERSION"
+      xcode:
+        version: latest
+    triggering:
+      events:
+        - push
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+      - name: Run Flutter tests
+        script: |
+          flutter test
+      - name: Build iOS unsigned build
+        script: |
+          flutter build ios --no-codesign
+    artifacts:
+      - build/ios/Debug-iphoneos/*.app
