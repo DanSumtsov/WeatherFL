@@ -2,6 +2,8 @@ workflows:
     sample-workflow:
         environment:
             flutter: stable
+    ios-workflow-id:
+        name: iOS Sample Workflow
 scripts:
     - name: Set up code signing settings on Xcode project
       script: | 
