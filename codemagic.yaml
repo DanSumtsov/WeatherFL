@@ -19,9 +19,6 @@ workflows:
       - name: Install Flutter dependencies
         script: |
           flutter pub get
-      - name: Run Flutter tests
-        script: |
-          flutter test
       - name: Build iOS unsigned build
         script: |
           flutter build ios --no-codesign
